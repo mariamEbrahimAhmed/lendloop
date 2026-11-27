@@ -1,0 +1,36 @@
+/*
+ * Typography tokens: font sizes, weights and families.
+ *   --text-heading        → text-heading
+ *   --font-weight-regular → font-regular
+ * Tailwind's own scales (text-sm, font-bold …) still work alongside these.
+ */
+
+@theme {
+  /* ---------- Font sizes (each with its line height) ---------- */
+  --text-display: 3rem; /* 48px — landing hero */
+  --text-display--line-height: 1.1;
+  --text-title: 2.25rem; /* 36px — page title */
+  --text-title--line-height: 1.2;
+  --text-heading: 1.5rem; /* 24px — section heading */
+  --text-heading--line-height: 1.3;
+  --text-subheading: 1.125rem; /* 18px — card title */
+  --text-subheading--line-height: 1.4;
+  --text-body: 1rem; /* 16px — default text */
+  --text-body--line-height: 1.5;
+  --text-label: 0.875rem; /* 14px — form labels, buttons */
+  --text-label--line-height: 1.4;
+  --text-caption: 0.75rem; /* 12px — hints, timestamps */
+  --text-caption--line-height: 1.3;
+
+  /* ---------- Font weights ---------- */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+/* next/font sets --font-geist-* on <html>; `inline` makes the utilities use them directly. */
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}

@@ -1,0 +1,67 @@
+/*
+ * Color tokens: brand palette, semantic light/dark colors, and the rules
+ * that decide which mode is active.
+ *   --color-primary → bg-primary, text-primary, border-primary, ring-primary …
+ *
+ * Semantic colors use light-dark(<light>, <dark>), so one class (e.g. bg-surface)
+ * is correct in both modes — no dark: prefix needed. The mode follows the OS by
+ * default; set data-theme="light" | "dark" on <html> to force one.
+ */
+
+@theme {
+  /* ---------- Brand palette (raw shades, same in both modes) ---------- */
+  --color-brand-50: #effaf8;
+  --color-brand-100: #d6f2ec;
+  --color-brand-200: #aee4d9;
+  --color-brand-300: #7dcfc0;
+  --color-brand-400: #4eb3a3;
+  --color-brand-500: #2f9888;
+  --color-brand-600: #227a6e;
+  --color-brand-700: #1f625a;
+  --color-brand-800: #1c4f49;
+  --color-brand-900: #1a423d;
+
+  /* ---------- Semantic colors: light-dark(<light>, <dark>) ---------- */
+  /* Surfaces */
+  --color-background: light-dark(#ffffff, #0b0f0e);
+  --color-surface: light-dark(#f7f8f8, #141a19);
+  --color-surface-muted: light-dark(#eef0f0, #1d2523);
+  --color-border: light-dark(#e2e5e4, #2a3331);
+
+  /* Text */
+  --color-foreground: light-dark(#151a19, #ecefee);
+  --color-foreground-muted: light-dark(#5b6664, #9aa5a3);
+
+  /* Actions */
+  --color-primary: light-dark(var(--color-brand-600), var(--color-brand-400));
+  --color-primary-hover: light-dark(var(--color-brand-700), var(--color-brand-300));
+  --color-primary-foreground: light-dark(#ffffff, #0b0f0e);
+
+  /* Status */
+  --color-success: light-dark(#15803d, #4ade80);
+  --color-warning: light-dark(#b45309, #fbbf24);
+  --color-danger: light-dark(#b91c1c, #f87171);
+}
+
+/* ---------- Mode: which side of light-dark() is used ---------- */
+:root {
+  color-scheme: light dark; /* follow the OS */
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Keep Tailwind's dark: variant in sync with the same rule. */
+@custom-variant dark {
+  :root[data-theme="dark"] & {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) & {
+      @slot;
+    }
+  }
+}
