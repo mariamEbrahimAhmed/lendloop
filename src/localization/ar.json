@@ -1,0 +1,12 @@
+{
+  "Metadata": {
+    "title": "LendLoop",
+    "description": "لوحة الحي لإعارة الأدوات"
+  },
+  "Header": {
+    "appName": "LendLoop"
+  },
+  "Home": {
+    "title": "LendLoop"
+  }
+}

@@ -1,0 +1,12 @@
+/*
+ * LendLoop theme — entry point, imported by src/app/globals.css.
+ *
+ * Every @theme token EXTENDS Tailwind's defaults and becomes a utility class.
+ * Tailwind merges all @theme blocks, so tokens can live in whichever file fits:
+ *   typography.css  font sizes, weights, families
+ *   colors.css      brand palette, light/dark semantic colors, mode rules
+ * Add a new file here (e.g. spacing.css, radius.css) when a new token type appears.
+ */
+
+@import "./typography.css";
+@import "./colors.css";
