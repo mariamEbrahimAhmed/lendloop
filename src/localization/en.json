@@ -1,0 +1,12 @@
+{
+  "Metadata": {
+    "title": "LendLoop",
+    "description": "Neighborhood tool-lending board"
+  },
+  "Header": {
+    "appName": "LendLoop"
+  },
+  "Home": {
+    "title": "LendLoop"
+  }
+}
