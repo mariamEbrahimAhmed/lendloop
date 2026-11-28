@@ -26,7 +26,8 @@ src/theme/          design tokens and theme config (colors, typography, light/da
 src/localization/   next-intl setup: routing.ts (locales, RTL), request.ts, navigation.ts,
                     <locale>.json (en.json, ar.json) — no hard-coded UI text
 src/proxy.ts        middleware (Next 16 name for middleware.ts): next-intl language routing
-convex/             schema.ts, queries/mutations/actions
+convex/             schema.ts, http.ts, seed.ts, lib/, one folder per table (users/, roles/…)
+                    with constants.ts, validators.ts, schema.ts, queries.ts, mutations.ts
 convex/_generated/  created by `npx convex dev` — commit it, never edit it
 ```
 
@@ -99,8 +100,11 @@ npm run build               # production build — run before calling work done
 - Don't read or print `.env*` files. They're gitignored and hold keys.
 
 ### Convex
-- Define every table in `convex/schema.ts`.
-- Validate all function arguments with `v` validators.
+Full guidelines: `.claude/rules/convex.md` (folder layout, validators, queries, auth, Next.js usage).
+- One folder per table; each table is defined in `<table>/schema.ts` and combined in `convex/schema.ts`.
+- Every function has `args` **and** `returns` validators; no `.filter()` — use indexes.
+- Public functions check permissions on the server (`PermissionKey`, not roles); backend-only
+  ones are `internal*`.
 - Webhooks from n8n/Clerk arrive as Convex `httpAction`s: verify the HMAC signature first,
   and make handlers idempotent (safe to receive the same event twice).
 
@@ -112,4 +116,4 @@ npm run build               # production build — run before calling work done
 
 ## Project skills
 
-Project-specific skills live in `.claude/skills/<name>/SKILL.md`.
+Project-specific skills live in `.claude/skills/<name>/SKILL.md`; topic rules in `.claude/rules/*.md`.

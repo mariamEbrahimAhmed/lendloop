@@ -8,5 +8,15 @@
   },
   "Home": {
     "title": "LendLoop"
+  },
+  "Errors": {
+    "bad_request": "Something in your request isn't valid. Please check it and try again.",
+    "unauthenticated": "Please sign in to continue.",
+    "forbidden": "You don't have permission to do this.",
+    "not_found": "We couldn't find what you're looking for.",
+    "conflict": "This can't be done right now because something changed. Please refresh and try again.",
+    "rate_limited": "Too many attempts. Please wait a moment and try again.",
+    "unavailable": "This service is temporarily unavailable. Please try again later.",
+    "invalid_email": "Please enter a valid email address."
   }
 }
