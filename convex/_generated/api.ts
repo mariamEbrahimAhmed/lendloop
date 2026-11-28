@@ -8,7 +8,9 @@
  * @module
  */
 
+import type * as http from "../http.js";
 import type * as lib_email from "../lib/email.js";
+import type * as lib_webhooks from "../lib/webhooks.js";
 import type * as permissions_constants from "../permissions/constants.js";
 import type * as permissions_helpers from "../permissions/helpers.js";
 import type * as permissions_seed from "../permissions/seed.js";
@@ -27,6 +29,7 @@ import type * as users_constants from "../users/constants.js";
 import type * as users_helpers from "../users/helpers.js";
 import type * as users_mutations from "../users/mutations.js";
 import type * as users_validators from "../users/validators.js";
+import type * as users_webhook from "../users/webhook.js";
 
 import type {
   ApiFromModules,
@@ -36,7 +39,9 @@ import type {
 import { anyApi, componentsGeneric } from "convex/server";
 
 const fullApi: ApiFromModules<{
+  http: typeof http;
   "lib/email": typeof lib_email;
+  "lib/webhooks": typeof lib_webhooks;
   "permissions/constants": typeof permissions_constants;
   "permissions/helpers": typeof permissions_helpers;
   "permissions/seed": typeof permissions_seed;
@@ -55,6 +60,7 @@ const fullApi: ApiFromModules<{
   "users/helpers": typeof users_helpers;
   "users/mutations": typeof users_mutations;
   "users/validators": typeof users_validators;
+  "users/webhook": typeof users_webhook;
 }> = anyApi as any;
 
 /**
