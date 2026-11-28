@@ -25,6 +25,8 @@ convex/
     schema.ts            usersTable = defineTable(userFields).index(...)
     queries.ts           public `query` + `internalQuery`
     mutations.ts         public `mutation` + `internalMutation`
+    helpers.ts           plain functions taking `ctx` for lookups used by several functions
+                         (`getUserByClerkId(ctx, id)`); not Convex functions
     actions.ts           `action` / `internalAction` (only when calling outside services)
   resources/             permission sections; constants.ts has the ResourceKey enum
   permissions/           constants.ts has the PermissionKey enum

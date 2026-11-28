@@ -19,10 +19,13 @@ import type * as resources_validators from "../resources/validators.js";
 import type * as rolePermissions_seed from "../rolePermissions/seed.js";
 import type * as rolePermissions_validators from "../rolePermissions/validators.js";
 import type * as roles_constants from "../roles/constants.js";
+import type * as roles_helpers from "../roles/helpers.js";
 import type * as roles_seed from "../roles/seed.js";
 import type * as roles_validators from "../roles/validators.js";
 import type * as seed from "../seed.js";
 import type * as users_constants from "../users/constants.js";
+import type * as users_helpers from "../users/helpers.js";
+import type * as users_mutations from "../users/mutations.js";
 import type * as users_validators from "../users/validators.js";
 
 import type {
@@ -44,10 +47,13 @@ const fullApi: ApiFromModules<{
   "rolePermissions/seed": typeof rolePermissions_seed;
   "rolePermissions/validators": typeof rolePermissions_validators;
   "roles/constants": typeof roles_constants;
+  "roles/helpers": typeof roles_helpers;
   "roles/seed": typeof roles_seed;
   "roles/validators": typeof roles_validators;
   seed: typeof seed;
   "users/constants": typeof users_constants;
+  "users/helpers": typeof users_helpers;
+  "users/mutations": typeof users_mutations;
   "users/validators": typeof users_validators;
 }> = anyApi as any;
 
