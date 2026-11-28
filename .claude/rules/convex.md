@@ -28,16 +28,20 @@ convex/
     actions.ts           `action` / `internalAction` (only when calling outside services)
   resources/             permission sections; constants.ts has the ResourceKey enum
   permissions/           constants.ts has the PermissionKey enum
-  roles/                 constants.ts has RoleKey and the default grants (ROLE_PERMISSIONS)
+  roles/                 constants.ts has RoleKey and DEFAULT_ROLE_KEY
   rolePermissions/       link table: which role has which permission
-  seed.ts                idempotent seed of resources, permissions, roles, grants
-                         (`npx convex run seed`)
+  seed.ts                entry point of the idempotent seed (`npx convex run seed`):
+                         calls each table's `<table>/seed.ts` helper in dependency order
   tools/ loans/ ...      same shape per table
-  _generated/            created by `npx convex dev`; commit it, never edit it
+  _generated/            created by `npx convex dev` as .ts files (set in /convex.json);
+                         commit it together with the code it reflects, never edit it
 ```
 
 - Every table has its own folder named after the table, link tables included
   (`rolePermissions/`); `<table>/schema.ts` defines exactly that one table.
+- Built-in data a table needs goes in `<table>/seed.ts`, both the rows and the plain helper
+  that inserts them (`seedRoles(ctx)`), not a Convex function; only `convex/seed.ts` is
+  runnable. `constants.ts` keeps only what running code uses (enums, defaults).
 - File path = API path: `convex/users/queries.ts` → `api.users.queries.getMe`,
   internal ones → `internal.users.mutations.upsertFromClerk`.
 - File names: letters, numbers, `_` only (no `-`).
@@ -117,7 +121,8 @@ convex/
   the function must also check the user owns / takes part in the row. Compare by key (enums in `<table>/constants.ts`),
   never by `_id` or `name`.
 - A new permission: add it to `PermissionKey` (a new section also to `ResourceKey`),
-  grant it in `ROLE_PERMISSIONS`, then `npx convex run seed`. The seed only adds missing rows; it
+  grant it in `ROLE_PERMISSIONS` (`rolePermissions/seed.ts`; initial grants only, checks
+  read the table), then `npx convex run seed`. The seed only adds missing rows; it
   never edits or revokes, so removing a grant is a data change (dashboard or mutation).
 - Every document has `_id` and `_creationTime`. Look things up by `_id` when you have it.
 - Validators: `v.int64()` (not the deprecated `v.bigint()`); `v.record(keys, values)` for
