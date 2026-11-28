@@ -160,6 +160,20 @@ convex/
 - Full-text search: a `searchIndex` in the schema, then
   `.withSearchIndex("search_name", (q) => q.search("name", text).eq("ownerId", id)).take(10)`.
 
+## Errors
+
+- Errors the user should see: `throw appError(ErrorCode.X)` (`lib/errors.ts`). The client
+  reads `error.data.code` and shows `t("Errors.<code>")`; never send UI text from Convex.
+- Prefer a general code (`bad_request`, `forbidden`, `not_found`, `conflict`…); add a
+  specific one (like `invalid_email`) only when the UI needs a clearer message.
+- A new code: add it to `ErrorCode`, `ERROR_HTTP_STATUS`, and `Errors` in **both**
+  `en.json` and `ar.json`.
+- HTTP statuses only matter in `httpAction`s (`ERROR_HTTP_STATUS[code]`); queries and
+  mutations report `error.data.code`, never a status.
+- Bugs and setup problems: plain `throw new Error(...)`; Convex hides them in production.
+- Catching: `isAppError(error, ErrorCode.X)`. Webhooks reply 2xx for appErrors (retrying
+  can't fix bad data) and let unexpected errors become 500 (the sender retries).
+
 ## Mutations
 
 - `ctx.db.patch(id, fields)` merges; `ctx.db.replace(id, doc)` replaces whole. Both throw

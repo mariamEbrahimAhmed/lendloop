@@ -10,6 +10,7 @@
 
 import type * as http from "../http.js";
 import type * as lib_email from "../lib/email.js";
+import type * as lib_errors from "../lib/errors.js";
 import type * as lib_webhooks from "../lib/webhooks.js";
 import type * as permissions_constants from "../permissions/constants.js";
 import type * as permissions_helpers from "../permissions/helpers.js";
@@ -41,6 +42,7 @@ import { anyApi, componentsGeneric } from "convex/server";
 const fullApi: ApiFromModules<{
   http: typeof http;
   "lib/email": typeof lib_email;
+  "lib/errors": typeof lib_errors;
   "lib/webhooks": typeof lib_webhooks;
   "permissions/constants": typeof permissions_constants;
   "permissions/helpers": typeof permissions_helpers;
